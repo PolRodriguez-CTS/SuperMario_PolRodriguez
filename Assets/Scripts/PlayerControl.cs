@@ -9,10 +9,12 @@ public class PlayerControl : MonoBehaviour
     private float inputHorizontal;
     private Rigidbody2D rigidBody;
     public float jumpForce = 10;
+    public GroundSensor _groundSensor;
     
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        _groundSensor = GetComponentInChildren<GroundSensor>();
     }
     
     // Start is called before the first frame update
@@ -35,7 +37,8 @@ public class PlayerControl : MonoBehaviour
         
         //Move towards hace que el objeto vaya de un punto a otro
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
-        if(Input.GetButtonDown("Jump"))
+        //condición para el salto
+        if(Input.GetButtonDown("Jump") && !_groundSensor.isGrounded == false)
         {
             rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
