@@ -6,6 +6,15 @@ public class PlayerControl : MonoBehaviour
 {
     public float playerSpeed = 4.5f;
     public int playerDirection = 1;
+    private float inputHorizontal;
+    private Rigidbody2D rigidBody;
+    public float jumpForce = 10;
+    
+    void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +26,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
         //Mover automáticamente en X --> playerSpeed = velocidad    playerDirection = dirección en la que se mueve
         //transform.position = new Vector3 (transform.position.x + playerDirection * playerSpeed * Time.deltaTime, transform.position.y, transform.position.z);
         
@@ -24,6 +34,18 @@ public class PlayerControl : MonoBehaviour
         //transform.Translate(new Vector3 (playerDirection * playerSpeed * Time.deltaTime, 0, 0));
         
         //Move towards hace que el objeto vaya de un punto a otro
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), playerSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
+        if(Input.GetButtonDown("Jump"))
+        {
+            rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        //Tres maneras de mover el personaje con rigidbody
+        rigidBody.velocity = new Vector2(inputHorizontal*playerSpeed, rigidBody.velocity.y);
+        //rigidBody.AddForce(new Vector2(inputHorizontal,0));
+        //rigidBody.MovePosition(new Vector2(100,0));
     }
 }
