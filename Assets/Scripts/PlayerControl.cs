@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
     public GroundSensor _groundSensor;
 
     public SpriteRenderer _spriteRenderer;
+
+    private Animator _animator;
     
     //función de Unity que se llama sola
     void Awake()
@@ -21,6 +23,7 @@ public class PlayerControl : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         _groundSensor = GetComponentInChildren<GroundSensor>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
     
     // Start is called before the first frame update
@@ -45,11 +48,21 @@ public class PlayerControl : MonoBehaviour
         //Move towards hace que el objeto vaya de un punto a otro
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
         //condición para el salto
+        
+        
         if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
         {
             Jump();
         }
         Movement();
+
+        _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
+        /*
+        if(_groundSensor.isGrounded)
+        {
+            _animator.SetBool("IsJumping", false);
+        }
+        */
     }
 
     void FixedUpdate()
@@ -67,15 +80,22 @@ public class PlayerControl : MonoBehaviour
          if(inputHorizontal > 0)
         {
             _spriteRenderer.flipX = false;
+            _animator.SetBool("IsRunning", true);
         }
         else if(inputHorizontal < 0)
         {
             _spriteRenderer.flipX = true;
+            _animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("IsRunning", false);
         }
     }
 
     void Jump()
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        _animator.SetBool("IsJumping", true);
     }
 }
