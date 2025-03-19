@@ -14426,6 +14426,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -14501,12 +14502,29 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 2.61, z: -10}
+  m_LocalPosition: {x: -112.3946, y: -2.73, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1588868657}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963fc11daf12c7642bc0296cee6267ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1588868657}
+  offset: {x: 3, y: 2.5, z: -10}
+  maxPosition: {x: 97, y: 3.5}
+  minPosition: {x: -117, y: -2.86}
+  interpolationRatio: 0.15
 --- !u!1 &526824190
 GameObject:
   m_ObjectHideFlags: 0
@@ -46246,6 +46264,7 @@ MonoBehaviour:
   playerDirection: 1
   jumpForce: 10
   _groundSensor: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
 --- !u!50 &1588868654
 Rigidbody2D:
   serializedVersion: 4
@@ -46379,12 +46398,11 @@ Transform:
   m_GameObject: {fileID: 1588868652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -123.37, y: -2.84, z: 0}
+  m_LocalPosition: {x: -115.39, y: -5.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2073998715}
-  - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1591917123
@@ -59210,7 +59228,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.53149855}
+  m_Offset: {x: 0, y: -0.47778082}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -59221,7 +59239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.72, y: 0.34684396}
+  m_Size: {x: 0.72, y: 0.2394085}
   m_EdgeRadius: 0
 --- !u!1 &2076226361
 GameObject:
@@ -61469,4 +61487,5 @@ SceneRoots:
   - {fileID: 817127839}
   - {fileID: 1174548187}
   - {fileID: 1166559715}
+  - {fileID: 519420032}
   - {fileID: 1588868657}
