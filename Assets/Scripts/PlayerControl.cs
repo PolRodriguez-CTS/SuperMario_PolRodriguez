@@ -9,13 +9,20 @@ public class PlayerControl : MonoBehaviour
     //almacena si pulsamos el boton para movernos
     private float inputHorizontal;
     //variable de componente
-    private Rigidbody2D rigidBody;
+    
     public float jumpForce = 15;
+
+    private Rigidbody2D rigidBody;
+
     public GroundSensor _groundSensor;
 
     public SpriteRenderer _spriteRenderer;
 
     private Animator _animator;
+
+    private AudioSource _audioSource;
+
+    public AudioClip jumpSFX;
     
     //función de Unity que se llama sola
     void Awake()
@@ -24,6 +31,7 @@ public class PlayerControl : MonoBehaviour
         _groundSensor = GetComponentInChildren<GroundSensor>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
     
     // Start is called before the first frame update
@@ -97,5 +105,6 @@ public class PlayerControl : MonoBehaviour
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
+        _audioSource.PlayOneShot(jumpSFX);
     }
 }
