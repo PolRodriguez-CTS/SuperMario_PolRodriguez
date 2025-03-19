@@ -14,6 +14,16 @@ public class CameraMovement : MonoBehaviour
 
     public float interpolationRatio = 0.5f;
 
+    void Awake()
+    {
+        //Busca un objeto por el nombre en la escena
+        //playerTransform = GameObject.Find("Mario_0").transform;
+
+        //Busca un objeto por el tag
+        playerTransform = GameObject.FindWithTag ("Player").transform;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
