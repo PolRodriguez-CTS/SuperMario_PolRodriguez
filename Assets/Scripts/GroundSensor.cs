@@ -12,8 +12,15 @@ public class GroundSensor : MonoBehaviour
         {
             isGrounded = true;
         }
+        else if(collider.gameObject.layer == 6)
+        {
+            /*Lo que hace collider.GameObject aquí es hacer que se destruya el objeto 
+            que entra en el collider de Mario (serán los objetos de la capa 6)*/
+            //Destroy(collider.gameObject);
+            Enemy _enemyScript = collider.gameObject.GetComponent<Enemy>();
+            _enemyScript.Death();
+        }
     }
-
 
     void OnTriggerStay2D(Collider2D collider)
     {

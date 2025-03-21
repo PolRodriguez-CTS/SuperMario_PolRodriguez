@@ -21,6 +21,10 @@ public class MisteryBox : MonoBehaviour
         if(!_isOpen)
         {
             _animator.SetTrigger("OpenBox");
+            /*
+            Modificar el volumen del audio
+            _audioSource.volume = num entre 0 - 100
+            */
             _audioSource.clip = _misteryBoxSFX;
             _isOpen = true;
         }
@@ -29,6 +33,12 @@ public class MisteryBox : MonoBehaviour
             _audioSource.clip = _misteryBoxOpenSFX;
         }
         _audioSource.Play();
+        /*
+        Otras funciones de AudioSource
+        .Play --> Reproduce
+        .Pause --> Pausa, se puede reanudar desde donde se pausó el sonido
+        .Stop --> Se para el sonido y si se vuelve a reproducir empieza desde el principio
+        */
     }
 
     void OnTriggerEnter2D (Collider2D collider)
