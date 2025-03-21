@@ -34083,7 +34083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3cff1f2d74bf442af4c95616640772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MisteryBoxSFX: {fileID: 8300000, guid: 7fbe0836935dc574aa10cd7c0b17cda3, type: 3}
+  _misteryBoxSFX: {fileID: 8300000, guid: 7fbe0836935dc574aa10cd7c0b17cda3, type: 3}
+  _misteryBoxOpenSFX: {fileID: 8300000, guid: e3f6eb52d4625f54ab36580bfc9162b0, type: 3}
 --- !u!1 &1147441750
 GameObject:
   m_ObjectHideFlags: 0
