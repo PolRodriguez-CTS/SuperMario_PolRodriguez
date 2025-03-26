@@ -33,6 +33,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        /*//condición para comprobar si existe el player, si es así se ejecuta el seguimiento de la cámara para evitar errores cuando el jugador muera
+        if(playerTransform != null)
+        {
         //Queremos que la posición de la cámara sea igual a la del jugador (Mario) + el offset
         Vector3 desiredPosition = playerTransform.position + offset;
 
@@ -43,6 +46,20 @@ public class CameraMovement : MonoBehaviour
 
         Vector3 lerpedPosition = Vector3.Lerp(transform.position, clampedPosition, interpolationRatio);
         //Hacemos que la posición ahora equivalga a clamped position, Clammped position = posición del jugador + el offset + los límites
+        transform.position = lerpedPosition;
+        }
+        */
+        if(playerTransform == null)
+        {
+            //Return corta el código, es decir todo lo que hay a partir de aquí no se leería
+            return;
+        }
+
+        Vector3 desiredPosition = playerTransform.position + offset;
+        float clampX = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
+        float ClampY = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
+        Vector3 clampedPosition = new Vector3(clampX, ClampY, desiredPosition.z);
+        Vector3 lerpedPosition = Vector3.Lerp(transform.position, clampedPosition, interpolationRatio);
         transform.position = lerpedPosition;
     }
 }

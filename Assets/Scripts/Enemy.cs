@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private Animator _animator;
     private AudioSource _audioSource;
-    private AudioClip _deathSFX;
+    public AudioClip _deathSFX;
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
 
@@ -41,7 +41,9 @@ public class Enemy : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>();
+            playerScript.Death();
+            //Destroy(collision.gameObject);
         }
     }
 }

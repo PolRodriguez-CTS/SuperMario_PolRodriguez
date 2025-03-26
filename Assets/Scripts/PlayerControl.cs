@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
+    private BoxCollider2D _boxCollider;
+
     public GroundSensor _groundSensor;
 
     public SpriteRenderer _spriteRenderer;
@@ -23,6 +25,13 @@ public class PlayerControl : MonoBehaviour
     private AudioSource _audioSource;
 
     public AudioClip jumpSFX;
+
+    public AudioClip deathSFX;
+
+    private GameManager _gameManager;
+
+    private SoundManager _soundManager;
+
     
     //función de Unity que se llama sola
     void Awake()
@@ -32,6 +41,9 @@ public class PlayerControl : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = GameObject.FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
     }
     
     // Start is called before the first frame update
@@ -39,12 +51,16 @@ public class PlayerControl : MonoBehaviour
     {
         //Teletransporta al personaje
         //transform.position = new Vector3 (0, 0, 0);
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Condicion, si hemos muerto no se ejecuta el código que permite movernos
+        if(!_gameManager.isPlaying)
+        {
+            return;
+        }
         //este input lo podemos encontrar en Unity como bindeo de tecla de los controles del jugador.
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         //Mover automáticamente en X --> playerSpeed = velocidad    playerDirection = dirección en la que se mueve
@@ -106,5 +122,21 @@ public class PlayerControl : MonoBehaviour
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
         _audioSource.PlayOneShot(jumpSFX);
+    }
+
+    public void Death()
+    {
+        _animator.SetTrigger("IsDead");
+        _audioSource.PlayOneShot(deathSFX);
+        _boxCollider.enabled = false;
+        rigidBody.gravityScale = 0;
+
+        Destroy(_groundSensor.gameObject);
+        inputHorizontal = 0;
+        rigidBody.velocity = Vector2.zero;
+
+        //_soundManager.Invoke("DeathBGM", 10);
+
+        _gameManager.isPlaying = false;
     }
 }
