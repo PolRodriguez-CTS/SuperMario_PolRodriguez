@@ -21,6 +21,11 @@ public class Enemy : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    void Start()
+    {
+        speed = 0;
+    }
+
     void FixedUpdate()
     {
         _rigidBody.velocity = new Vector2(direction * speed, _rigidBody.velocity.y);
@@ -37,13 +42,26 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        direction *= -1;
-
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6)
+        {
+            direction *= -1;
+        }
+       
         if(collision.gameObject.CompareTag("Player"))
         {
             PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>();
             playerScript.Death();
             //Destroy(collision.gameObject);
         }
+    }
+
+    void OnBecameVisible()
+    {
+        speed = 2.5f;
+    }
+
+    void OnbecameInvisible()
+    {
+        speed = 0;
     }
 }

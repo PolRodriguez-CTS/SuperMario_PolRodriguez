@@ -129,14 +129,21 @@ public class PlayerControl : MonoBehaviour
         _animator.SetTrigger("IsDead");
         _audioSource.PlayOneShot(deathSFX);
         _boxCollider.enabled = false;
-        rigidBody.gravityScale = 0;
 
         Destroy(_groundSensor.gameObject);
+
         inputHorizontal = 0;
         rigidBody.velocity = Vector2.zero;
 
+        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
         //_soundManager.Invoke("DeathBGM", 10);
 
+        //llamar coruntina de otro script
+        StartCoroutine(_soundManager.DeathBGM());
+
         _gameManager.isPlaying = false;
+
+        Destroy(gameObject, 4);
     }
 }

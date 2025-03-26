@@ -8,8 +8,9 @@ public class SoundManager : MonoBehaviour
     private GameManager _gameManager;
     public AudioClip _bgm;
     public AudioClip _gameOver;
-    public float delay = 2;
+    public float delay = 3;
     public float timer;
+    //Varaible comprobar contador ha terminado --> private bool timerFinsished = false;
     
     void Awake()
     {
@@ -24,10 +25,10 @@ public class SoundManager : MonoBehaviour
 
     void Update()
     {
-        if(!_gameManager.isPlaying)
+        /*if(!_gameManager.isPlaying && !timerFinsished)
         {
-            DeathBGM();
-        }
+                 DeathBGM();
+        }*/
      
     }
 
@@ -38,7 +39,7 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    public void DeathBGM()
+    /*public void DeathBGM()
     {
         _audioSource.Stop();
         
@@ -46,7 +47,17 @@ public class SoundManager : MonoBehaviour
 
         if(timer >= delay)
         {
+            timerFinsished = true;
             _audioSource.PlayOneShot(_gameOver);
         }
+    }*/
+
+    public IEnumerator DeathBGM()
+    {
+        _audioSource.Stop();
+
+        yield return new WaitForSeconds(delay);
+
+        _audioSource.PlayOneShot(_gameOver);
     }
 }
