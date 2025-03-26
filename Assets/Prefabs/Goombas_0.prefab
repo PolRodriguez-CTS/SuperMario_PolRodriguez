@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathSFX: {fileID: 8300000, guid: ef3d684d172d994418e6cacc911b5ec7, type: 3}
-  direction: 1
+  direction: -1
   speed: 2.5
 --- !u!95 &1035693018323445342
 Animator:

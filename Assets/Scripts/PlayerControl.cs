@@ -61,6 +61,10 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
+        if(_gameManager.isPaused)
+        {
+            return;
+        }
         //este input lo podemos encontrar en Unity como bindeo de tecla de los controles del jugador.
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         //Mover automáticamente en X --> playerSpeed = velocidad    playerDirection = dirección en la que se mueve
