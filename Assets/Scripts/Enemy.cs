@@ -33,9 +33,12 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
+        
         direction = 0;
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("isDead");
+        _audioSource.clip = _deathSFX;
+        _audioSource.Play();
         _boxCollider.enabled = false;
         Destroy(gameObject, 0.3f);
     }
