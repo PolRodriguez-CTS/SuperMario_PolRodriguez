@@ -37,6 +37,9 @@ public class PlayerControl : MonoBehaviour
     private GameManager _gameManager;
 
     private SoundManager _soundManager;
+    public bool canShoot = false;
+    public float shootDuration = 10;
+    public float shootTimer;
 
     
     //función de Unity que se llama sola
@@ -97,10 +100,17 @@ public class PlayerControl : MonoBehaviour
             _animator.SetBool("IsJumping", false);
         }
         */
-         if(Input.GetButtonDown("Fire1"))
+         if(Input.GetButtonDown("Fire1") && canShoot)
         {
             Shoot();
         }
+
+        if(canShoot)
+        {
+            //Llama la función que inicia el timer del powerUp
+            PowerUp();
+        }
+       
     }
 
     void FixedUpdate()
@@ -165,5 +175,15 @@ public class PlayerControl : MonoBehaviour
     {
         _audioSource.PlayOneShot(shootSFX);
         Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+    }
+
+    void PowerUp()
+    {
+        shootTimer += Time.deltaTime;
+        if(shootTimer >= shootDuration)
+        {
+            canShoot = false;
+            shootTimer = 0;
+        }
     }
 }

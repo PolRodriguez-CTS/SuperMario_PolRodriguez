@@ -6,25 +6,18 @@ public class PowerUp : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
-
     public float speed = 2;
-
-    public int direction = 1;
-
+    private int direction = 1;
     private AudioSource _audioSource;
-
-    public AudioClip _powerUp;
+    public AudioClip _powerUpSFX;
+    private SpriteRenderer _spriteRenderer;
     
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -40,17 +33,19 @@ public class PowerUp : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            Death();
+            PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>();
+            playerScript.canShoot = true;
+            EatMushroom();
         }
     }
 
-    void Death()
+    void EatMushroom()
     {
         direction = 0;
         _rigidBody.gravityScale = 0;
         _boxCollider.enabled = false;
-        Destroy (gameObject);
-        _audioSource.clip = _powerUp;
-        _audioSource.Play();
+        _spriteRenderer.enabled = false;
+        _audioSource.PlayOneShot(_powerUpSFX);
+        Destroy (gameObject, _powerUpSFX.length);
     }
 }
