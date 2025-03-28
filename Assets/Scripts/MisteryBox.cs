@@ -9,6 +9,9 @@ public class MisteryBox : MonoBehaviour
     public AudioClip _misteryBoxSFX;
     public AudioClip _misteryBoxOpenSFX;
     private bool _isOpen = false;
+    public Transform mushroomSpawn;
+
+    public GameObject mushroomPrefab;
 
     void Awake ()
     {
@@ -27,6 +30,7 @@ public class MisteryBox : MonoBehaviour
             */
             _audioSource.clip = _misteryBoxSFX;
             _isOpen = true;
+            SpawnMushroom();
         }
         else
         {
@@ -39,6 +43,11 @@ public class MisteryBox : MonoBehaviour
         .Pause --> Pausa, se puede reanudar desde donde se pausó el sonido
         .Stop --> Se para el sonido y si se vuelve a reproducir empieza desde el principio
         */
+    }
+
+    void SpawnMushroom()
+    {
+        Instantiate(mushroomPrefab, mushroomSpawn.position, mushroomSpawn.rotation);
     }
 
     void OnTriggerEnter2D (Collider2D collider)

@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public AudioClip _deathSFX;
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
-
     public int direction = 1;
     public float speed = 2.5f;
 

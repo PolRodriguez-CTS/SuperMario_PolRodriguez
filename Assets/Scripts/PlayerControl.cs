@@ -22,11 +22,17 @@ public class PlayerControl : MonoBehaviour
 
     private Animator _animator;
 
+    public Transform bulletSpawn;
+
+    public GameObject bulletPrefab;
+
     private AudioSource _audioSource;
 
     public AudioClip jumpSFX;
 
     public AudioClip deathSFX;
+
+    public AudioClip shootSFX;
 
     private GameManager _gameManager;
 
@@ -77,7 +83,6 @@ public class PlayerControl : MonoBehaviour
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
         //condición para el salto
         
-        
         if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
         {
             Jump();
@@ -85,12 +90,17 @@ public class PlayerControl : MonoBehaviour
         Movement();
 
         _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
+
         /*
         if(_groundSensor.isGrounded)
         {
             _animator.SetBool("IsJumping", false);
         }
         */
+         if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
     }
 
     void FixedUpdate()
@@ -107,12 +117,12 @@ public class PlayerControl : MonoBehaviour
         //Si el input horizontal es positivo, en el componente SpriteRenderer, Flip X no se activa, si el input horizontal es negativo, se activa
          if(inputHorizontal > 0)
         {
-            _spriteRenderer.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             _animator.SetBool("IsRunning", true);
         }
         else if(inputHorizontal < 0)
         {
-            _spriteRenderer.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             _animator.SetBool("IsRunning", true);
         }
         else
@@ -149,5 +159,11 @@ public class PlayerControl : MonoBehaviour
         _gameManager.isPlaying = false;
 
         Destroy(gameObject, 4);
+    }
+
+    void Shoot()
+    {
+        _audioSource.PlayOneShot(shootSFX);
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
     }
 }
