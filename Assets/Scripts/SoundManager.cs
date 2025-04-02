@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     private AudioSource _audioSource;
     private GameManager _gameManager;
+    private Flagpole _flagPole;
     public AudioClip _bgm;
     public AudioClip _gameOver;
     public float delay = 3;
@@ -16,6 +17,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        _flagPole = FindObjectOfType<
     }
 
     void Start()
@@ -37,6 +39,14 @@ public class SoundManager : MonoBehaviour
         _audioSource.clip = _bgm;
         _audioSource.loop = true;
         _audioSource.Play();
+    }
+
+    void StopBGM()
+    {
+        if(_flagPole.hasWinned)
+        {
+            _audioSource.Stop();
+        }
     }
 
     public void PauseBGM()
