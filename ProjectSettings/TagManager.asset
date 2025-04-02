@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tuberia
   - Coins
+  - Wall
   layers:
   - Default
   - TransparentFX

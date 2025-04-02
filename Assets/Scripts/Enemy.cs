@@ -55,6 +55,10 @@ public class Enemy : MonoBehaviour
             playerScript.Death();
             //Destroy(collision.gameObject);
         }
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            direction *= -1;
+        }
     }
 
     void OnBecameVisible()

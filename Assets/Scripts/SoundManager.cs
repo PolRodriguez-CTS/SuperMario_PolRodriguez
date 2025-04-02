@@ -6,9 +6,10 @@ public class SoundManager : MonoBehaviour
 {
     private AudioSource _audioSource;
     private GameManager _gameManager;
-    private Flagpole _flagPole;
+    private Flagpole _flagpole;
     public AudioClip _bgm;
     public AudioClip _gameOver;
+    public AudioClip _victory;
     public float delay = 3;
     public float timer;
     //Varaible comprobar contador ha terminado --> private bool timerFinsished = false;
@@ -17,7 +18,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        _flagPole = FindObjectOfType<
+        _flagpole = FindObjectOfType<Flagpole>().GetComponent<Flagpole>();
     }
 
     void Start()
@@ -41,13 +42,16 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    void StopBGM()
+    public void VictoryBGM()
     {
-        if(_flagPole.hasWinned)
+        if(_flagpole.hasWinned)
         {
-            _audioSource.Stop();
+          _audioSource.clip = _victory;
+          _audioSource.Play();  
         }
+        
     }
+
 
     public void PauseBGM()
     {
