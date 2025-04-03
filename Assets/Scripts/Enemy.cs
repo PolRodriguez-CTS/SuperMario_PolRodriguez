@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6)
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6 || collision.gameObject.CompareTag("Pared"))
         {
             direction *= -1;
         }
@@ -55,7 +55,11 @@ public class Enemy : MonoBehaviour
             playerScript.Death();
             //Destroy(collision.gameObject);
         }
-        if(collision.gameObject.CompareTag("Wall"))
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Wall"))
         {
             direction *= -1;
         }
