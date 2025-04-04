@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
     public AudioClip _coinSFX;
+    private GameManager _gameManager;
     
 
     void Awake()
@@ -15,6 +16,7 @@ public class Coin : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void OnTriggerEnter2D (Collider2D collider)
@@ -27,6 +29,7 @@ public class Coin : MonoBehaviour
 
     void CoinDeath()
     {   
+        _gameManager.AddCoins();
         _boxCollider.enabled = false;
         _audioSource.PlayOneShot(_coinSFX);
         _spriteRenderer.enabled = false;

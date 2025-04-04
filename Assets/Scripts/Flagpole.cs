@@ -21,7 +21,8 @@ public class Flagpole : MonoBehaviour
         {
             Victory();
             SoundManager _victoryBGM = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
-            _victoryBGM.VictoryBGM();
+            //_victoryBGM.VictoryBGM();
+            StartCoroutine(_victoryBGM.VictoriaBGM());
         }
     }
 
@@ -29,6 +30,7 @@ public class Flagpole : MonoBehaviour
     {   
         _boxCollider.enabled = false;
         _audioSource.PlayOneShot(_flagPoleSFX);
-        hasWinned = true;
+        //La booleana solo sirve si uso la función VictoryBGM, como ahora estoy usando corutina no hace falta
+        //hasWinned = true;
     }
 }

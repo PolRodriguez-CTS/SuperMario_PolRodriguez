@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip _gameOver;
     public AudioClip _victory;
     public float delay = 3;
+
+    public float delayVictoryBGM = 2;
     public float timer;
     //Varaible comprobar contador ha terminado --> private bool timerFinsished = false;
     
@@ -18,7 +20,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        _flagpole = FindObjectOfType<Flagpole>().GetComponent<Flagpole>();
+        _flagpole = GameObject.Find("Flag").GetComponent<Flagpole>();
     }
 
     void Start()
@@ -42,14 +44,22 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
+    //Esta función hace lo mismo que la corutina de abajo, solo que es mejor la corutina para el delay, por tanto la variable booleana hasWinned no sirve si usamos la booleana
+/*
     public void VictoryBGM()
     {
         if(_flagpole.hasWinned)
         {
           _audioSource.clip = _victory;
-          _audioSource.Play();  
-        }
-        
+          _audioSource.Play();
+        }    
+    }
+*/
+    public IEnumerator VictoriaBGM()
+    {
+        _audioSource.clip = _victory;
+        yield return new WaitForSeconds(delayVictoryBGM);
+        _audioSource.PlayOneShot(_victory);
     }
 
 
@@ -81,9 +91,7 @@ public class SoundManager : MonoBehaviour
     public IEnumerator DeathBGM()
     {
         _audioSource.Stop();
-
         yield return new WaitForSeconds(delay);
-
         _audioSource.PlayOneShot(_gameOver);
     }
 }
