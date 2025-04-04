@@ -28,6 +28,8 @@ public class PlayerControl : MonoBehaviour
     public float shootDuration = 10;
     public float shootTimer;
     public Image _powerUpImage;
+    private MenuManager _menuManager;
+
 
     
     //función de Unity que se llama sola
@@ -40,6 +42,7 @@ public class PlayerControl : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _menuManager = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
         _soundManager = GameObject.FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
     }
     
@@ -158,6 +161,8 @@ public class PlayerControl : MonoBehaviour
         _gameManager.isPlaying = false;
 
         Destroy(gameObject, 4);
+
+        _menuManager.GameOver();
     }
 
     void Shoot()

@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject pauseCanvas;
     private int coins = 0;
     public Text coinsText;
+    private int goombas = 0;
+
+    public Text goombasText;
+
 
     void Awake()
     {
@@ -21,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         coinsText.text= "Coins: " + coins.ToString();
+        goombasText.text = "Goombas: " + goombas.ToString();
     }
 
     void Update()
@@ -28,11 +33,7 @@ public class GameManager : MonoBehaviour
         Pause();
     }
 
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-        Time.timeScale = 1;
-    }
+    
 
     public void Pause()
     {
@@ -61,5 +62,11 @@ public class GameManager : MonoBehaviour
         coins++;
         //To string cambia el valor a un string (texto)
         coinsText.text = "Coins: " + coins.ToString();
+    }
+
+    public void AddGoombas()
+    {
+        goombas++;
+        goombasText.text = "Goombas: " + goombas.ToString();
     }
 }

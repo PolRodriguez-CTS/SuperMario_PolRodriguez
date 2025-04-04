@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 5;
     private float currentHealth;
     private Slider _healthBar;
+    private GameManager _gameManager;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _healthBar = GetComponentInChildren<Slider>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Start()
@@ -42,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-        
+        _gameManager.AddGoombas();
         direction = 0;
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("isDead");
