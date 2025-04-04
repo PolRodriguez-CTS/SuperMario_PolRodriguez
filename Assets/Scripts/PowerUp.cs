@@ -35,6 +35,7 @@ public class PowerUp : MonoBehaviour
         {
             PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>();
             playerScript.canShoot = true;
+            playerScript.shootTimer = 0;
             EatMushroom();
         }
     }

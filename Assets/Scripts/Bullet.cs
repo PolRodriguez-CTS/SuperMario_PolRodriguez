@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     public float bulletForce = 10;
+    public float bulletDamage = 2;
 
     
     void Awake()
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             //creamos variable para almacenar el script de enemy y así poder llamar a la función de muerte del goomba
             Enemy _enemyScript = collider.gameObject.GetComponent<Enemy>();
-            _enemyScript.Death();
+            _enemyScript.TakeDamage(bulletDamage);
             BulletDeath();
         }
         if(collider.gameObject.layer == 3)

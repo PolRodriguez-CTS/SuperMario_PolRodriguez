@@ -6,6 +6,7 @@ public class GroundSensor : MonoBehaviour
 {
     public bool isGrounded;
     private Rigidbody2D _rigidBody;
+    public float stompDamage = 5;
 
     void Awake()
     {
@@ -26,7 +27,7 @@ public class GroundSensor : MonoBehaviour
             que entra en el collider de Mario (serán los objetos de la capa 6)*/
             //Destroy(collider.gameObject);
             Enemy _enemyScript = collider.gameObject.GetComponent<Enemy>();
-            _enemyScript.Death();
+            _enemyScript.TakeDamage(stompDamage);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -9,37 +10,24 @@ public class PlayerControl : MonoBehaviour
     //almacena si pulsamos el boton para movernos
     private float inputHorizontal;
     //variable de componente
-    
     public float jumpForce = 15;
-
     private Rigidbody2D rigidBody;
-
     private BoxCollider2D _boxCollider;
-
     public GroundSensor _groundSensor;
-
     public SpriteRenderer _spriteRenderer;
-
     private Animator _animator;
-
     public Transform bulletSpawn;
-
     public GameObject bulletPrefab;
-
     private AudioSource _audioSource;
-
     public AudioClip jumpSFX;
-
     public AudioClip deathSFX;
-
     public AudioClip shootSFX;
-
     private GameManager _gameManager;
-
     private SoundManager _soundManager;
     public bool canShoot = false;
     public float shootDuration = 10;
     public float shootTimer;
+    public Image _powerUpImage;
 
     
     //función de Unity que se llama sola
@@ -90,6 +78,7 @@ public class PlayerControl : MonoBehaviour
         {
             Jump();
         }
+
         Movement();
 
         _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
@@ -180,6 +169,7 @@ public class PlayerControl : MonoBehaviour
     void PowerUp()
     {
         shootTimer += Time.deltaTime;
+        _powerUpImage.fillAmount = Mathf.InverseLerp(shootDuration, 0, shootTimer);
         if(shootTimer >= shootDuration)
         {
             canShoot = false;

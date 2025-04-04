@@ -10,8 +10,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip _bgm;
     public AudioClip _gameOver;
     public AudioClip _victory;
+    public AudioClip _pauseSFX;
     public float delay = 3;
-
     public float delayVictoryBGM = 2;
     public float timer;
     //Varaible comprobar contador ha terminado --> private bool timerFinsished = false;
@@ -65,6 +65,7 @@ public class SoundManager : MonoBehaviour
 
     public void PauseBGM()
     {
+        //pausa
         if(_gameManager.isPaused)
         {
             _audioSource.Pause();

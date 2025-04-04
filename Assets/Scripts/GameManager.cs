@@ -62,6 +62,4 @@ public class GameManager : MonoBehaviour
         //To string cambia el valor a un string (texto)
         coinsText.text = "Coins: " + coins.ToString();
     }
-
-
 }
