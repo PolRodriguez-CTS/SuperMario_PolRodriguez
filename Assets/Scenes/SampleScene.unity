@@ -8012,6 +8012,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 71.0198, y: 2.005869}
   m_EdgeRadius: 0
+--- !u!1 &245351386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245351387}
+  m_Layer: 0
+  m_Name: -----UI-----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &245351387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245351386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.390879, y: -4.428977, z: 0.056188915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1546905619}
+  - {fileID: 1430262040}
+  - {fileID: 973247959}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245387553
 GameObject:
   m_ObjectHideFlags: 0
@@ -31300,7 +31334,7 @@ RectTransform:
   - {fileID: 949696177}
   - {fileID: 188668070}
   - {fileID: 697913437}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 245351387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -45575,12 +45609,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430262037}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.390879, y: 4.428977, z: -0.056188915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 245351387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431685301
 GameObject:
@@ -48935,18 +48969,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546905615}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.056188915}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 214863254}
   - {fileID: 1367497192}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 245351387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -26.390879, y: 4.428977}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1548710298
@@ -53072,6 +53106,7 @@ MonoBehaviour:
   isPlaying: 1
   isPaused: 0
   pauseCanvas: {fileID: 1546905615}
+  optionsCanvas: {fileID: 1367497191}
   coinsText: {fileID: 949696178}
   goombasText: {fileID: 697913438}
 --- !u!4 &1700311761
@@ -66578,6 +66613,4 @@ SceneRoots:
   - {fileID: 1616691625}
   - {fileID: 719671881}
   - {fileID: 1784167051}
-  - {fileID: 1546905619}
-  - {fileID: 1430262040}
-  - {fileID: 973247959}
+  - {fileID: 245351387}
