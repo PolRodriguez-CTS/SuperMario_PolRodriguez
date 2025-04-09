@@ -27,7 +27,7 @@ public class PowerUp : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 7)
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 7 || collision.gameObject.CompareTag("Pared"))
         {
             direction *= -1;
         }

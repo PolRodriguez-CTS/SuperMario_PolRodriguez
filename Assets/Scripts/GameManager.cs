@@ -30,15 +30,16 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Pause();
+        if(Input.GetButtonDown("Pause"))
+        {
+            Pause();
+        }
     }
 
     
 
     public void Pause()
     {
-        if(Input.GetButtonDown("Pause"))
-        {
             if(isPaused)
             {
                 Time.timeScale = 1;
@@ -54,7 +55,6 @@ public class GameManager : MonoBehaviour
                 _soundManager.PauseBGM();
                 pauseCanvas.SetActive(true);
             }
-        }
     }
 
     public void AddCoins()
