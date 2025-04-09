@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-     private float delay = 6;
+     private float delay;
+     //public float delay = 7;
+
    public void Play()
    {
         SceneManager.LoadScene(1);
@@ -29,6 +31,10 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator WaitAndLoad()
     {
+          SoundManager _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
+          PlayerControl _playerScript = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
+          //delay = _playerScript.deathSFX.length;
+          delay = _soundManager._gameOver.length + _playerScript.deathSFX.length;
           yield return new WaitForSeconds (delay);
           SceneManager.LoadScene(2);
     }

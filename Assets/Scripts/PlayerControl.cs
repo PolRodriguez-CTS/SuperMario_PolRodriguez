@@ -160,7 +160,7 @@ public class PlayerControl : MonoBehaviour
 
         _gameManager.isPlaying = false;
 
-        Destroy(gameObject, 4);
+        Destroy(gameObject, deathSFX.length);
 
         _menuManager.GameOver();
     }

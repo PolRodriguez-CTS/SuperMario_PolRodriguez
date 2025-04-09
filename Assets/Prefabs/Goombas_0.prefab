@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dffe1439132aa945a35dbbdbcf5d8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathSFX: {fileID: 8300000, guid: ef3d684d172d994418e6cacc911b5ec7, type: 3}
-  _damageSFX: {fileID: 8300000, guid: e15e99a9a90e3a14cbfe347e56af9884, type: 3}
+  _deathSFX: {fileID: 8300000, guid: 8284a5b4d2f4f5643918fa52a3118df0, type: 3}
+  _damageSFX: {fileID: 8300000, guid: ef3d684d172d994418e6cacc911b5ec7, type: 3}
   direction: -1
   speed: 2.5
   maxHealth: 5

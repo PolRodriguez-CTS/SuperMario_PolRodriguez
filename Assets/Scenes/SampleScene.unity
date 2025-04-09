@@ -6654,7 +6654,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 110.01281, y: 0}
@@ -41937,8 +41937,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgm: {fileID: 8300000, guid: e9ee9907b53fecd41a0d6efe69f65263, type: 3}
-  _gameOver: {fileID: 8300000, guid: c19b8098be100594cbd20352f60e75ea, type: 3}
-  _victory: {fileID: 8300000, guid: d80e9de9f11d7124ea200a4b0fbc7938, type: 3}
+  _gameOver: {fileID: 8300000, guid: b99e36c465ed90646a83cf7a14620688, type: 3}
+  _victory: {fileID: 8300000, guid: 4c455180bf8d48c4ab7f535fc3e1dc84, type: 3}
   _pauseSFX: {fileID: 8300000, guid: 765ab1dcd249fab43b87e81e79bbe37f, type: 3}
   delay: 3
   delayVictoryBGM: 2

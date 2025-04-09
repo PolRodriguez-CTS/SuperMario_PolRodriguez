@@ -6,11 +6,11 @@ public class Fall : MonoBehaviour
 {
     private BoxCollider2D _boxCollider;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collider.gameObject.CompareTag("Player"))
         {
-            PlayerControl _playerScript = collision.gameObject.GetComponent<PlayerControl>();
+            PlayerControl _playerScript = collider.gameObject.GetComponent<PlayerControl>();
             _playerScript.Death();
         }
     }
