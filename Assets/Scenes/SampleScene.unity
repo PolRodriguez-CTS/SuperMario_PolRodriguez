@@ -14469,7 +14469,7 @@ Transform:
   m_GameObject: {fileID: 422226849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.28, y: 0.62, z: -0.006133914}
+  m_LocalPosition: {x: 2.8, y: -2.48, z: -0.006133914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36886,9 +36886,10 @@ MonoBehaviour:
   _enemiesPrefab:
   - {fileID: 81691266148188696, guid: d15591be18a18f347a951e93242cc3ce, type: 3}
   - {fileID: 5456887234625075075, guid: c1af1b6b4ac66244689918f8c5b173dc, type: 3}
-  _enemiesToSpawn: 5
-  _spawnPoint: {fileID: 422226850}
-  _collider: {fileID: 0}
+  _enemiesToSpawn: 20
+  _spawnPoint:
+  - {fileID: 422226850}
+  - {fileID: 1239163147}
 --- !u!61 &1152546303
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36948,6 +36949,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 422226850}
+  - {fileID: 1239163147}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156038613
@@ -39567,6 +39569,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1239163146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239163147}
+  m_Layer: 0
+  m_Name: Spawn Point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239163147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239163146}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.28, y: -2.52, z: -0.006133914}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1152546304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241356671
 GameObject:
   m_ObjectHideFlags: 0
@@ -53241,6 +53274,7 @@ MonoBehaviour:
   optionsCanvas: {fileID: 1367497191}
   coinsText: {fileID: 949696178}
   goombasText: {fileID: 697913438}
+  enemiesInScreen: []
 --- !u!4 &1700311761
 Transform:
   m_ObjectHideFlags: 0

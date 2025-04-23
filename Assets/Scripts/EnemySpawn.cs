@@ -13,8 +13,8 @@ public class EnemySpawn : MonoBehaviour
 
     [Tooltip("Numero de enemigos que spawnear")]
     [SerializeField] private int _enemiesToSpawn;
-    [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private BoxCollider2D _collider;
+    [SerializeField] private Transform[] _spawnPoint;
+    private BoxCollider2D _collider;
     
     private int _enemyIndex;
 
@@ -25,10 +25,10 @@ public class EnemySpawn : MonoBehaviour
     }
     void Update()
     {
-        if(_enemiesToSpawn == 0)
+        /*if(_enemiesToSpawn == 0)
         {
             CancelInvoke();
-        }   
+        }*/  
     }
 
     void OnTriggerEnter2D (Collider2D collider)
@@ -40,16 +40,23 @@ public class EnemySpawn : MonoBehaviour
             //Invoke llama a la función que indiquemos, esperando un delay que designemos
             //Invoke("SpawnEnemy", 5);
             //También está InvokeRepeating, hace lo mismo pero repetidamente: InvokeRepeating("Nombre función", delay de entrada, delay de repetición);
-            InvokeRepeating("SpawnEnemies", 0, 2);
+            StartCoroutine(SpawnEnemies());
         }
     }
 
-    void SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
-        //Si lo usamos con ints --> (minimo incluido, maximo sin incluir) (0, 6) (entre 0 y 5)
-        //Con floats es mínimo y máximo incluido
-        _enemyIndex = Random.Range(0, 2);
-        Instantiate(_enemiesPrefab[_enemyIndex], _spawnPoint.position, _spawnPoint.rotation);
-        _enemiesToSpawn--;
+        for(int i = 0; i < _enemiesToSpawn; i++)
+        {
+            //Si lo usamos con ints --> (minimo incluido, maximo sin incluir) (0, 6) (entre 0 y 5)
+            //Con floats es mínimo y máximo incluido
+            foreach(Transform spawn in _spawnPoint)
+            {
+                _enemyIndex = Random.Range(0, _enemiesPrefab.Length);
+                Instantiate(_enemiesPrefab[_enemyIndex], spawn.position, spawn.rotation);
+                yield return new WaitForSeconds(1);
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 }

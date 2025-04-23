@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     private int coins = 0;
     public Text coinsText;
     private int goombas = 0;
-
     public Text goombasText;
+    public List<GameObject> enemiesInScreen; 
 
 
     void Awake()
@@ -34,6 +34,15 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Pause"))
         {
             Pause();
+        }
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            foreach(GameObject enemy in enemiesInScreen)
+            {
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                enemyScript.Death();
+            }
         }
     }
 

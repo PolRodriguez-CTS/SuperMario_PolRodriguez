@@ -86,13 +86,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnbecameVisible()
+    void OnBecameVisible()
     {
         direction = 1;
+        _gameManager.enemiesInScreen.Add(gameObject);
     }
 
-    void OnbecameInvisible()
+    void OnBecameInvisible()
     {
         direction = 0;
+        _gameManager.enemiesInScreen.Remove(gameObject);
     }
 }
