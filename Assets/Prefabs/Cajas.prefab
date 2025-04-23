@@ -291,7 +291,11 @@ MonoBehaviour:
   _misteryBoxSFX: {fileID: 8300000, guid: b89c5b8ad669dcc408f131c3fc608b71, type: 3}
   _misteryBoxOpenSFX: {fileID: 8300000, guid: e3f6eb52d4625f54ab36580bfc9162b0, type: 3}
   mushroomSpawn: {fileID: 1580859261109582896}
-  mushroomPrefab: {fileID: 4229714864749312732, guid: e50de5164bf59fa4f82669a884aea93c, type: 3}
+  powerUpPrefab:
+  - {fileID: 4229714864749312732, guid: e50de5164bf59fa4f82669a884aea93c, type: 3}
+  - {fileID: 81691266148188696, guid: d15591be18a18f347a951e93242cc3ce, type: 3}
+  - {fileID: 3749828923672949874, guid: 284ab7bd4f61a8e4e87103f2b1ba8d41, type: 3}
+  powerUpIndex: 0
 --- !u!95 &1941646466533160110
 Animator:
   serializedVersion: 5
@@ -338,7 +342,7 @@ Transform:
   m_GameObject: {fileID: 3256647794004128586}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.74, z: 0}
+  m_LocalPosition: {x: 0, y: 0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

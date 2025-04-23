@@ -11,7 +11,8 @@ public class MisteryBox : MonoBehaviour
     private bool _isOpen = false;
     public Transform mushroomSpawn;
 
-    public GameObject mushroomPrefab;
+    public GameObject[] powerUpPrefab;
+    public int powerUpIndex;
 
     void Awake ()
     {
@@ -47,7 +48,7 @@ public class MisteryBox : MonoBehaviour
 
     void SpawnMushroom()
     {
-        Instantiate(mushroomPrefab, mushroomSpawn.position, mushroomSpawn.rotation);
+        Instantiate(powerUpPrefab[powerUpIndex], mushroomSpawn.position, mushroomSpawn.rotation);
     }
 
     void OnTriggerEnter2D (Collider2D collider)
