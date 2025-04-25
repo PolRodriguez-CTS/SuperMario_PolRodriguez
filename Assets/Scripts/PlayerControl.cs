@@ -30,6 +30,22 @@ public class PlayerControl : MonoBehaviour
     public Image _powerUpImage;
     private MenuManager _menuManager;
 
+    [SerializeField] private float _dashforce = 20;
+    [SerializeField] private float _dashDuration = 0.5f;
+    [SerializeField] private float _dashCoolDown = 1;
+
+    private bool _canDash = true;
+    private bool _isDashing = false;
+
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _attackDamage = 10;
+    [SerializeField] private float _attackRadius = 1;
+
+    [SerializeField] private Transform _hitBoxPosition;
+    [SerializeField] private float _baseChargedAttackDamage = 15;
+    [SerializeField] private float _maxChargedAttackDamage = 40;
+    private float _chargedAttackDamage;
+    
 
     
     //función de Unity que se llama sola
@@ -51,6 +67,7 @@ public class PlayerControl : MonoBehaviour
     {
         //Teletransporta al personaje
         //transform.position = new Vector3 (0, 0, 0);
+        _chargedAttackDamage = _baseChargedAttackDamage;
     }
 
     // Update is called once per frame
@@ -62,6 +79,12 @@ public class PlayerControl : MonoBehaviour
             return;
         }
         if(_gameManager.isPaused)
+        {
+            return;
+        }
+
+        //sirve para parar el código mientras hacemos dash y que por lo tanto todo lo que hay bajo esta linea no se ejecuta (para evitar saltar mientras hacemos dash)
+        if(_isDashing)
         {
             return;
         }
@@ -77,10 +100,40 @@ public class PlayerControl : MonoBehaviour
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
         //condición para el salto
         
-        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
+        if (Input.GetButtonDown("Jump"))
+        {
+            if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
+            {
+                Jump();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
+        /*
+        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded)
         {
             Jump();
         }
+        */
+        
+        if(Input.GetButtonDown("Fire2"))
+        {
+            NormalAttack();
+        }
+        
+
+        /*if(Input.GetButton("Fire2"))
+        {
+            AttackCharge();
+        }
+
+        if(Input.GetButtonUp("Fire2"))
+        {
+            ChargedAttack();
+        }*/
 
         Movement();
 
@@ -92,7 +145,8 @@ public class PlayerControl : MonoBehaviour
             _animator.SetBool("IsJumping", false);
         }
         */
-         if(Input.GetButtonDown("Fire1") && canShoot)
+
+        if(Input.GetButtonDown("Fire1") && canShoot)
         {
             Shoot();
         }
@@ -107,8 +161,13 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(_isDashing)
+        {
+            return;
+        }
         //Tres maneras de mover el personaje con rigidbody
         rigidBody.velocity = new Vector2(inputHorizontal*playerSpeed, rigidBody.velocity.y);
+
         //rigidBody.AddForce(new Vector2(inputHorizontal,0));
         //rigidBody.MovePosition(new Vector2(100,0));
     }
@@ -135,10 +194,70 @@ public class PlayerControl : MonoBehaviour
 
     void Jump()
     {
+        if(!_groundSensor.isGrounded)
+        {
+            _groundSensor.canDoubleJump = false;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+            //aquí se pondrían las animaciones del doble salto
+        }
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
         _audioSource.PlayOneShot(jumpSFX);
     }
+
+    IEnumerator Dash()
+    {
+        float gravity = rigidBody.gravityScale;
+        rigidBody.gravityScale = 0;
+        //esto evita que el personaje se desplace hacia arriba
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+
+        _isDashing = true;
+        _canDash = false;
+        rigidBody.AddForce(transform.right*_dashforce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(_dashDuration);
+        rigidBody.gravityScale = gravity;
+        _isDashing = false;
+        yield return new WaitForSeconds(_dashCoolDown);
+        _canDash = true;
+    }
+
+    void NormalAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+        //Overlapcircle crea un radio donde detecta lo que hay
+        foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_attackDamage);
+        }
+    }
+
+    void AttackCharge()
+    {
+        if(_chargedAttackDamage < _maxChargedAttackDamage)
+        {
+            _chargedAttackDamage += Time.deltaTime;
+            Debug.Log(_chargedAttackDamage);
+        }
+        else
+        {
+            _chargedAttackDamage = _maxChargedAttackDamage;
+        }
+    }
+
+    void ChargedAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+        foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_chargedAttackDamage);
+        }
+
+        _chargedAttackDamage = _baseChargedAttackDamage;
+    }
+
 
     public void Death()
     {
@@ -180,5 +299,11 @@ public class PlayerControl : MonoBehaviour
             canShoot = false;
             shootTimer = 0;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
 }

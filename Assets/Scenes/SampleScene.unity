@@ -6203,7 +6203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 434.6, y: -55.4}
+  m_AnchoredPosition: {x: 434.59998, y: -55.399902}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188668071
@@ -26085,6 +26085,37 @@ Transform:
   - {fileID: 978594554}
   - {fileID: 1883141541}
   m_Father: {fileID: 719671881}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &818512037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818512038}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &818512038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818512037}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.12, y: 0.51, z: 0.03916023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1588868657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &819636338
 GameObject:
@@ -50509,6 +50540,17 @@ MonoBehaviour:
   shootDuration: 10
   shootTimer: 0
   _powerUpImage: {fileID: 188668071}
+  _dashforce: 20
+  _dashDuration: 0.5
+  _dashCoolDown: 1
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _attackDamage: 10
+  _attackRadius: 0.75
+  _hitBoxPosition: {fileID: 818512038}
+  _baseChargedAttackDamage: 15
+  _maxChargedAttackDamage: 40
 --- !u!50 &1588868654
 Rigidbody2D:
   serializedVersion: 4
@@ -50648,6 +50690,7 @@ Transform:
   m_Children:
   - {fileID: 2073998715}
   - {fileID: 1703905501}
+  - {fileID: 818512038}
   m_Father: {fileID: 665370188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1588868658
@@ -64213,6 +64256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   stompDamage: 5
+  canDoubleJump: 1
 --- !u!61 &2073998717
 BoxCollider2D:
   m_ObjectHideFlags: 0
